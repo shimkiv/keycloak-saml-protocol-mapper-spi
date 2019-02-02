@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.qaside</groupId>
+  <artifactId>keycloak-saml-protocol-mapper-spi</artifactId>
+  <version>0.0.1</version>
+  <packaging>jar</packaging>
+
+  <name>Keycloak SPI: SAML Extended Protocol mapper</name>
+  <description>
+    Keycloak SPI: SAML Extended Protocol mapper
+  </description>
+
+  <url>https://qaside.com</url>
+  <inceptionYear>2017</inceptionYear>
+
+  <organization>
+    <name>Qaside</name>
+    <url>https://qaside.com</url>
+  </organization>
+
+  <developers>
+    <developer>
+      <id>serhii.shymkiv</id>
+      <name>Serhii Shymkiv</name>
+      <email>sergey@shimkiv.com</email>
+      <url>https://linkedin.com/in/shimkiv</url>
+      <organization>Serhii Shymkiv</organization>
+      <organizationUrl>http://sergey.shimkiv.com</organizationUrl>
+      <roles>
+        <role>Software Development Engineer</role>
+      </roles>
+      <timezone>+1</timezone>
+      <properties>
+        <picUrl>https://media.licdn.com/mpr/mpr/shrink_200_200/p/1/005/029/115/0688fff.jpg</picUrl>
+      </properties>
+    </developer>
+  </developers>
+
+  <scm>
+    <connection>scm:https://git.qaside.com/kc-spi/kc-spi.git</connection>
+  </scm>
+
+  <issueManagement>
+    <system>GitLab</system>
+    <url>https://git.qaside.com/</url>
+  </issueManagement>
+
+  <ciManagement>
+    <system>GitLab CI/CD</system>
+    <url>https://git.qaside.com/</url>
+    <notifiers>
+      <notifier>
+        <type>mail</type>
+        <sendOnError>true</sendOnError>
+        <sendOnFailure>true</sendOnFailure>
+        <sendOnSuccess>false</sendOnSuccess>
+        <sendOnWarning>false</sendOnWarning>
+        <configuration>
+          <address>kc-spi@qaside.com</address>
+        </configuration>
+      </notifier>
+    </notifiers>
+  </ciManagement>
+
+  <mailingLists>
+    <mailingList>
+      <name>My Mailing List</name>
+      <post>kc-spi@qaside.com</post>
+    </mailingList>
+  </mailingLists>
+
+  <properties>
+    <jdk.version>1.8</jdk.version>
+    <jdk.min.version>1.8</jdk.min.version>
+    <keycloak.version>4.8.3.Final</keycloak.version>
+    <jboss.logging.version>3.3.2.Final</jboss.logging.version>
+
+    <maven.compiler.plugin.version>3.8.0</maven.compiler.plugin.version>
+    <maven.resources.plugin.version>3.1.0</maven.resources.plugin.version>
+    <maven.source.plugin.version>3.0.1</maven.source.plugin.version>
+    <maven.javadoc.plugin.version>3.0.1</maven.javadoc.plugin.version>
+    <maven.info.reports.plugin.version>3.0.0</maven.info.reports.plugin.version>
+    <maven.site.plugin.version>3.7.1</maven.site.plugin.version>
+
+    <maven.compiler.debug>false</maven.compiler.debug>
+    <maven.compiler.optimize>true</maven.compiler.optimize>
+    <maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
+    <maven.compiler.showWarnings>true</maven.compiler.showWarnings>
+    <maven.test.skip>false</maven.test.skip>
+    <maven.test.failure.ignore>true</maven.test.failure.ignore>
+
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.keycloak</groupId>
+      <artifactId>keycloak-common</artifactId>
+      <version>${keycloak.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.keycloak</groupId>
+      <artifactId>keycloak-core</artifactId>
+      <version>${keycloak.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.keycloak</groupId>
+      <artifactId>keycloak-server-spi</artifactId>
+      <version>${keycloak.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.keycloak</groupId>
+      <artifactId>keycloak-server-spi-private</artifactId>
+      <version>${keycloak.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.keycloak</groupId>
+      <artifactId>keycloak-services</artifactId>
+      <version>${keycloak.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.keycloak</groupId>
+      <artifactId>keycloak-saml-core-public</artifactId>
+      <version>${keycloak.version}</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jboss.logging</groupId>
+      <artifactId>jboss-logging</artifactId>
+      <version>${jboss.logging.version}</version>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <finalName>${project.artifactId}</finalName>
+
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>${maven.compiler.plugin.version}</version>
+          <executions>
+            <execution>
+              <goals>
+                <goal>compile</goal>
+                <goal>testCompile</goal>
+              </goals>
+            </execution>
+          </executions>
+          <configuration>
+            <compilerVersion>${jdk.version}</compilerVersion>
+            <source>${jdk.version}</source>
+            <target>${jdk.version}</target>
+            <showDeprecation>${maven.compiler.showDeprecation}</showDeprecation>
+            <showWarnings>${maven.compiler.showWarnings}</showWarnings>
+            <encoding>${project.build.sourceEncoding}</encoding>
+            <debug>${maven.compiler.debug}</debug>
+            <optimize>${maven.compiler.optimize}</optimize>
+          </configuration>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>${maven.resources.plugin.version}</version>
+          <configuration>
+            <encoding>${project.build.sourceEncoding}</encoding>
+          </configuration>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-source-plugin</artifactId>
+          <version>${maven.source.plugin.version}</version>
+          <executions>
+            <execution>
+              <id>attach-sources</id>
+              <phase>verify</phase>
+              <goals>
+                <goal>jar</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
+  <reporting>
+    <outputDirectory>${project.basedir}/target/reports/</outputDirectory>
+
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-project-info-reports-plugin</artifactId>
+        <version>${maven.info.reports.plugin.version}</version>
+        <configuration>
+          <dependencyDetailsEnabled>false</dependencyDetailsEnabled>
+        </configuration>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>index</report>
+              <report>summary</report>
+              <report>team</report>
+              <report>modules</report>
+              <report>mailing-lists</report>
+              <report>issue-management</report>
+              <report>scm</report>
+              <report>ci-management</report>
+              <report>licenses</report>
+              <report>dependencies</report>
+              <report>dependency-convergence</report>
+              <report>dependency-info</report>
+              <report>dependency-management</report>
+              <report>distribution-management</report>
+              <report>plugin-management</report>
+              <report>plugins</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>${maven.javadoc.plugin.version}</version>
+        <configuration>
+          <encoding>${project.reporting.outputEncoding}</encoding>
+          <links>
+            <link>http://docs.oracle.com/javase/8/docs/api/</link>
+          </links>
+          <additionalJOption>-Xdoclint:none</additionalJOption>
+          <bottom>
+            Copyright &#169; {inceptionYear}&#x2013;{currentYear} {organizationName}. All rights
+            reserved.
+          </bottom>
+        </configuration>
+        <reportSets>
+          <reportSet>
+            <id>default</id>
+            <reports>
+              <report>javadoc</report>
+              <report>test-javadoc</report>
+            </reports>
+            <inherited>true</inherited>
+          </reportSet>
+          <reportSet>
+            <id>aggregate</id>
+            <reports>
+              <report>aggregate</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <version>${maven.site.plugin.version}</version>
+        <configuration>
+          <outputDirectory>${project.basedir}/target/reports/${project.artifactId}/
+          </outputDirectory>
+        </configuration>
+      </plugin>
+    </plugins>
+  </reporting>
+</project>
