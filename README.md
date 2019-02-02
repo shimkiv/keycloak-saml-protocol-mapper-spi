@@ -7,6 +7,7 @@
 
 * Quick summary
     * Keycloak SAML Protocol Mapper SPI
+    * https://github.com/keycloak/keycloak/pull/5042
 * Version
     * 0.0.1
 
